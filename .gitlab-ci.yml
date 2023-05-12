@@ -1,0 +1,24 @@
+# Yarn 2+
+image: node:lts
+
+variables:
+  CONTENTFUL_SPACE: hznqrydiqe9d
+  CONTENTFUL_API_KEY: qhSEtAn6NyEli3LUr0vzTpLgdlQg54QX4A5PwMl-Ej4
+
+
+cache:
+  paths:
+    - node_modules/
+    - .next/cache/
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  before_script:
+    - corepack enable
+    - yarn set version stable
+  script:
+    - yarn
+    - yarn build
