@@ -1,6 +1,4 @@
-# SEKAI.ID Website V3.2
-
-🎉🎉🎉 SEKAI.ID Website Version 3.2 🎉🎉🎉
+# Frontend
 
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -21,11 +19,11 @@ corepack enable
 ## instalasi
 
 ```bash
-git clone https://gitlab.com/sekaidotid/website-v3.git
+git clone https://gitlab.com/laciadotid/Frontend.git
 ```
 
 ```bash
-cd website-v3
+cd Frontend
 ```
 
 ```bash
