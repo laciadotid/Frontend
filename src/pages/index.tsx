@@ -23,22 +23,21 @@ interface HomePageProps {
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     const data = await client.request(/* GraphQL */ `
-        {
-            postCollection(order: date_DESC) {
-                items {
+        query Post {
+            post {
+                id
+                title
+                slug
+                metaDescription
+                featuredImage
+                date
+                user {
+                    id
+                    name
+                }
+                category {
+                    id
                     title
-                    slug
-                    metaDescription
-                    featuredImage {
-                        url
-                    }
-                    date
-                    category {
-                        title
-                    }
-                    author {
-                        name
-                    }
                 }
             }
         }
@@ -46,7 +45,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 
     return {
         props: {
-            posts: data.postCollection.items,
+            posts: data.post,
         },
         // revalidate: 60,
     };
@@ -55,7 +54,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 const HomePage: NextPage<HomePageProps> = ({ posts }) => {
     return (
         <div>
-            <NextSeo
+            {/* <NextSeo
                 title={siteConfig.title}
                 description={siteConfig.description}
                 openGraph={{
@@ -78,7 +77,7 @@ const HomePage: NextPage<HomePageProps> = ({ posts }) => {
                     handle: "@" + siteConfig.twitterUsername,
                     site: "@" + siteConfig.twitterUsername,
                 }}
-            />
+            /> */}
             {posts.map((post, i) => (
                 <div key={i}>
                     <Link href={post.slug}>
@@ -94,10 +93,7 @@ const HomePage: NextPage<HomePageProps> = ({ posts }) => {
                             >
                                 <Center>
                                     <Image
-                                        src={
-                                            post.featuredImage.url +
-                                            "?fit=fill&fm=avif&w=480&h=270&q=30"
-                                        }
+                                        src={siteConfig.url + "/fotoberita/" + post.featuredImage}
                                         alt={post.title}
                                         width={480}
                                         height={270}
@@ -151,7 +147,7 @@ const HomePage: NextPage<HomePageProps> = ({ posts }) => {
                                                 "white",
                                             )}
                                         >
-                                            {post.author.name}
+                                            {post.user.name}
                                         </Text>
                                         <Text
                                             color={useColorModeValue(

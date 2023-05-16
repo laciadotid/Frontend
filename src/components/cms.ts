@@ -1,13 +1,12 @@
 import { GraphQLClient } from "graphql-request";
 
 export const ENDPOINT =
-  "https://graphql.contentful.com/content/v1/spaces/" +
-  process.env.CONTENTFUL_SPACE;
+  process.env.GRAPHQL_URL;
 
 export const client = new GraphQLClient(ENDPOINT, {
-  headers: {
-    Authorization: `Bearer ${process.env.CONTENTFUL_API_KEY}`,
-  },
+  // headers: {
+  //   Authorization: `Bearer ${process.env.CONTENTFUL_API_KEY}`,
+  // },
 });
 
 export const gql = async <T = any>(

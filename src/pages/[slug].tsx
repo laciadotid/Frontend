@@ -93,7 +93,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({
 const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
     return (
         <div>
-            <NextSeo
+            {/* <NextSeo
                 title={post.title + " - " + siteConfig.title}
                 openGraph={{
                     type: "website",
@@ -117,7 +117,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                     handle: "@" + siteConfig.twitterUsername,
                     site: "@" + siteConfig.twitterUsername,
                 }}
-            />
+            /> */}
             <div className="tx-5 card">
                 <Adsense />
 
@@ -134,8 +134,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                         <Center>
                             <Image
                                 src={
-                                    post.featuredImage.url +
-                                    "?fit=fill&fm=avif&w=480&h=270&q=30"
+                                    post.featuredImage.url
                                 }
                                 alt={post.title}
                                 width={480}
