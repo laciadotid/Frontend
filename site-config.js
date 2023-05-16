@@ -6,7 +6,7 @@ module.exports = {
     repository: "https://github.com/laciadotid/Frontend",
     // Wajib ada https atau http
     // jangan ada garis miring (/) di belakang
-    url: "http://backend.test/",
+    url: "http://frontend.test/",
     locale: "id_ID",
     email: "",
     // username tanpa @
