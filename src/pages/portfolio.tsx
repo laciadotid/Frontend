@@ -35,13 +35,13 @@ export default function Jasa() {
                     title: "Portfolio Jasa – SEKAI.ID",
                     images: [
                         {
-                            url: `${siteConfig.url}/social.avif`,
+                            url: `${siteConfig.frontend_url}/social.avif`,
                             width: 640,
                             height: 360,
                             alt: siteConfig.title,
                         },
                     ],
-                    url: siteConfig.url,
+                    url: siteConfig.frontend_url,
                     site_name: siteConfig.title,
                 }}
                 twitter={{
@@ -515,8 +515,10 @@ export default function Jasa() {
                             </b>
                             <br />
                             <br />
-                            memperbolehkan hasil karya untuk di pajang di website, sosial
-                            media SEKAI.ID & media lain nya untuk kepentingan promosi dengan resolusi kurang lebih 1/4 dari resolusi original
+                            memperbolehkan hasil karya untuk di pajang di
+                            website, sosial media SEKAI.ID & media lain nya
+                            untuk kepentingan promosi dengan resolusi kurang
+                            lebih 1/4 dari resolusi original
                             <br />
                             <br />
                         </Text>

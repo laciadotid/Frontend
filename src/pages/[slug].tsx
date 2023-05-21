@@ -33,15 +33,13 @@ interface BlogPostPageProps {
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     const data = await client.request(/* GraphQL */ `
-        {
-            postCollection(order: date_DESC) {
-                items {
-                    slug
-                }
+        query Post {
+            post {
+                slug
             }
         }
     `);
-    const items = data.postCollection.items as Post[];
+    const items = data.post as Post[];
 
     return {
         paths: items.map(({ slug }) => ({ params: { slug } })),
@@ -54,38 +52,29 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({
 }) => {
     const slug = params.slug as string;
     const data = await gql`
-
-{
-  postCollection(where: {slug: "${slug}"}) {
-    items {
-      title
-      slug
-      featuredImage {
-        url
-      }
-      date
-      category {
-        title
-        slug
-      }
-      author {
-        name
-        slug
-        photo {
-          url
+        query Post {
+            post(where: { slug: "${slug}" }) {
+                id
+                title
+                slug
+                metaDescription
+                featuredImage
+                date
+                content
+                user {
+                    id
+                    name
+                }
+                category {
+                    id
+                    title
+                }
+            }
         }
-      }
-      content
-      sourceName
-      sourceUrl
-    }
-  }
-}
-
-`;
+    `;
     return {
         props: {
-            post: data.postCollection.items[0] as Post,
+            post: data.post[0] as Post,
         },
     };
 };
@@ -109,7 +98,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                             alt: post.title,
                         },
                     ],
-                    url: siteConfig.url + post.slug,
+                    url: siteConfig.frontend_url + post.slug,
                     site_name: siteConfig.title,
                 }}
                 twitter={{
@@ -134,7 +123,9 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                         <Center>
                             <Image
                                 src={
-                                    post.featuredImage.url
+                                    siteConfig.backend_url +
+                                    "/fotoberita/" +
+                                    post.featuredImage
                                 }
                                 alt={post.title}
                                 width={480}
@@ -178,7 +169,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     fontWeight={600}
                                     color={useColorModeValue("black", "white")}
                                 >
-                                    {post.author.name}
+                                    {post.user.name}
                                 </Text>
                                 <Text
                                     color={useColorModeValue("black", "white")}
@@ -206,7 +197,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     className="inline-block px-4"
                                     href={
                                         "https://www.facebook.com/sharer.php?u=" +
-                                        siteConfig.url +
+                                        siteConfig.frontend_url +
                                         "/" +
                                         post.slug
                                     }
@@ -224,7 +215,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     className="inline-block px-4"
                                     href={
                                         "https://twitter.com/intent/tweet?url=" +
-                                        siteConfig.url +
+                                        siteConfig.frontend_url +
                                         "/" +
                                         post.slug +
                                         "&text=" +
@@ -246,7 +237,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     className="inline-block px-4"
                                     href={
                                         "https://www.pinterest.com/pin/create/button?url=" +
-                                        siteConfig.url +
+                                        siteConfig.frontend_url +
                                         "/" +
                                         post.slug +
                                         "&media=" +
@@ -268,7 +259,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     className="inline-block px-4"
                                     href={
                                         "https://www.linkedin.com/shareArticle?url=" +
-                                        siteConfig.url +
+                                        siteConfig.frontend_url +
                                         "/" +
                                         post.slug +
                                         "&title=" +
@@ -288,7 +279,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                                     className="inline-block px-4"
                                     href={
                                         "https://telegram.me/share/url?url=" +
-                                        siteConfig.url +
+                                        siteConfig.frontend_url +
                                         "/" +
                                         post.slug +
                                         "&text=" +
@@ -322,7 +313,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                         </ReactMarkdown>
                     </Box>
                 </Center>
-                <Center>
+                {/* <Center>
                     <Box
                         w={"full"}
                         boxShadow={"xl"}
@@ -334,7 +325,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                     >
                         Sumber :
                         {post.sourceName == null ? (
-                            <a href={siteConfig.url}>
+                            <a href={siteConfig.frontend_url}>
                                 {"【" + siteConfig.title + "】"}
                             </a>
                         ) : (
@@ -354,7 +345,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ post }) => {
                             </a>
                         )}
                     </Box>
-                </Center>
+                </Center> */}
                 <Center>
                     <Box
                         w={"full"}

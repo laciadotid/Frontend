@@ -1,12 +1,12 @@
 module.exports = {
     // Jangan Di Spasi
     title: "SEKAI.ID Test",
-    description:
-        "Testing Purpose",
+    description: "Testing Purpose",
     repository: "https://github.com/laciadotid/Frontend",
     // Wajib ada https atau http
     // jangan ada garis miring (/) di belakang
-    url: "http://frontend.test/",
+    backend_url: "http://backend.test",
+    frontend_url: "http://frontend.test",
     locale: "id_ID",
     email: "",
     // username tanpa @

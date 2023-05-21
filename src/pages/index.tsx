@@ -63,13 +63,13 @@ const HomePage: NextPage<HomePageProps> = ({ posts }) => {
                     title: siteConfig.title,
                     images: [
                         {
-                            url: `${siteConfig.url}/social.avif`,
+                            url: `${siteConfig.frontend_url}/social.avif`,
                             width: 640,
                             height: 360,
                             alt: siteConfig.title,
                         },
                     ],
-                    url: siteConfig.url,
+                    url: siteConfig.frontend_url,
                     site_name: siteConfig.title,
                 }}
                 twitter={{
@@ -93,7 +93,11 @@ const HomePage: NextPage<HomePageProps> = ({ posts }) => {
                             >
                                 <Center>
                                     <Image
-                                        src={siteConfig.url + "/fotoberita/" + post.featuredImage}
+                                        src={
+                                            siteConfig.backend_url +
+                                            "/fotoberita/" +
+                                            post.featuredImage
+                                        }
                                         alt={post.title}
                                         width={480}
                                         height={270}

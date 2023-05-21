@@ -1,7 +1,7 @@
 import { GraphQLClient } from "graphql-request";
+import siteConfig from "site-config";
 
-export const ENDPOINT =
-  process.env.GRAPHQL_URL;
+export const ENDPOINT = siteConfig.backend_url + "/graphql";
 
 export const client = new GraphQLClient(ENDPOINT, {
   // headers: {
